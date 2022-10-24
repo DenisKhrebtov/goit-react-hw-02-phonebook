@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class FormBook extends Component {
+export default class ContactForm extends Component {
   state = {
     name: '',
     number: '',
@@ -14,15 +14,18 @@ export default class FormBook extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.onSubmit(this.state);
-    this.reset();
-  };
-
-  reset = () => {
     this.setState({
       name: '',
       number: '',
     });
   };
+
+  // reset = () => {
+  //   this.setState({
+  //     name: '',
+  //     number: '',
+  //   });
+  // };
 
   render() {
     return (

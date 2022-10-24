@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-class ContactEditor extends Component {
+class ContactElement extends Component {
 
     state = {
         
