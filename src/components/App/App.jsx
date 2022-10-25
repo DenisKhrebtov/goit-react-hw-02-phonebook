@@ -3,6 +3,7 @@ import React from 'react';
 import ContactForm from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
+import { Wrapper, MainTitle, ContactsTitle } from './App.styled';
 
 export class App extends React.Component {
   state = {
@@ -27,10 +28,11 @@ export class App extends React.Component {
       name,
       number,
     };
-
-    this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
-    }));
+    this.state.contacts.find(contact => contact.name === name)
+      ? alert(`${name} is already in contacts`)
+      : this.setState(({ contacts }) => ({
+          contacts: [contact, ...contacts],
+        }));
   };
 
   changeFilter = e => {
@@ -50,16 +52,16 @@ export class App extends React.Component {
     const filterContacts = this.getVisibleContacts();
     const { filter } = this.state;
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <Wrapper>
+        <MainTitle>Phonebook</MainTitle>
         <ContactForm onSubmit={this.addContacts} />
-        <h2>Contacts</h2>
+        <ContactsTitle>Contacts</ContactsTitle>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
           contacts={filterContacts}
           onDeleteContact={this.deleteContact}
         />
-      </div>
+      </Wrapper>
     );
   }
 }
