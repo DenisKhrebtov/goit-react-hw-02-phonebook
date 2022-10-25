@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid';
-import React, { Component } from 'react';
-import FormBook from '../ContactForm/ContactForm';
-import ContactForm from '../ContactList/ContactList';
-import Filter from '../Filter/Filter';
+import React from 'react';
+import ContactForm from '../ContactForm/ContactForm';
+import { ContactList } from '../ContactList/ContactList';
+import { Filter } from '../Filter/Filter';
 
-export class App extends Component {
+export class App extends React.Component {
   state = {
     contacts: [
       { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -17,13 +17,9 @@ export class App extends Component {
 
   deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(todo => todo.id !== contactId),
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
-
-  // formSubmitHandler = data => {
-  //   console.log(data);
-  // };
 
   addContacts = ({ name, number }) => {
     const contact = {
@@ -41,22 +37,25 @@ export class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  render() {
-    const { filter } = this.state;
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normilizedFilter = filter.toLowerCase();
 
-    const normilizedFilter = this.state.filter.toLowerCase();
-
-    const filterContacts = this.state.contacts.filter(contact =>
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normilizedFilter)
     );
+  };
 
+  render() {
+    const filterContacts = this.getVisibleContacts();
+    const { filter } = this.state;
     return (
       <div>
         <h1>Phonebook</h1>
-        <FormBook onSubmit={this.addContacts} />
+        <ContactForm onSubmit={this.addContacts} />
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
-        <ContactForm
+        <ContactList
           contacts={filterContacts}
           onDeleteContact={this.deleteContact}
         />

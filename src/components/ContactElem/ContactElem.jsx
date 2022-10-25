@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-class ContactElement extends Component {
+// import React, { Component } from 'react';
+// class ContactElement extends Component {
 
-    state = {
-        
-    }
-    render() {
-        return (
+//     state = {
 
-        )
-    
-        
-    }
-}
+//     }
+//     render() {
+//         return (
+
+//         )
+
+//     }
+// }
