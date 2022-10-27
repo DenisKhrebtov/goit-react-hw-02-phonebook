@@ -3,7 +3,7 @@ import React from 'react';
 import ContactForm from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
-import { Wrapper, MainTitle, ContactsTitle } from './App.styled';
+import { Wrapper, Title } from './App.styled';
 
 export class App extends React.Component {
   state = {
@@ -53,9 +53,9 @@ export class App extends React.Component {
     const { filter } = this.state;
     return (
       <Wrapper>
-        <MainTitle>Phonebook</MainTitle>
+        <Title>Phonebook</Title>
         <ContactForm onSubmit={this.addContacts} />
-        <ContactsTitle>Contacts</ContactsTitle>
+        <Title>Contacts</Title>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
           contacts={filterContacts}
